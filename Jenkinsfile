@@ -9,9 +9,9 @@ pipeline {
                     script: '''#!/bin/bash
                     if docker ps -q -f name=wordpressdb;
                     then
-                        cd ~/wordpress && touch yes
+                        cd ~/wordpress && touch 11111
                     else
-                        cd ~/wordpress && touch not
+                        cd ~/wordpress && touch 22222
                     fi
             '''
             }
