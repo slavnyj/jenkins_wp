@@ -23,7 +23,7 @@ pipeline {
                     if [ $( docker ps -a | grep wordpress | wc -l ) -gt 0 ]; then
                         echo "Container with Wordpress exist, start container wordpress ..." && docker start wordpress
                     else
-                        echo "Container does not exist. Create container with Wordpress, name: wordpress ..." && docker run -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=rootpass --name wordpress --link wordpressdb:mysql -p 80:80 -v "$PWD/html":/var/www/html -d wordpress
+                        echo "Container does not exist. Create container with Wordpress, name: wordpress ..." && docker run -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=rootpass --name wordpress --link mariadb:mysql -p 80:80 -v "$PWD/html":/var/www/html -d wordpress
                     fi
                     '''
             }
