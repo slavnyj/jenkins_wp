@@ -6,12 +6,13 @@ pipeline {
         stage('Start MySQL') {
             steps {
                 echo 'Start MariaDB container'
-                def inspectExitCode = sh script: "docker container inspect wordpressdb", returnStatus: true
-                if (inspectExitCode == 0) {
-                    sh "echo "Container exist 1" "
-                } else {
-                    sh script: "echo "DOnt Container exist 0" "
-                
+                script {
+                    def inspectExitCode = sh script: "docker container inspect wordpressdb", returnStatus: true
+                    if (inspectExitCode == 0) {
+                        sh "echo "Container exist 1" "
+                    }else {
+                        sh script: "echo "DOnt Container exist 0" "
+                    }}
                 /*sh(returnStdout: true, script:'''#!/bin/bash -xe
                     if docker ps -a --format '{{.Names}}' | grep wordpressdb;
                     then
@@ -22,7 +23,7 @@ pipeline {
                         docker run -e MYSQL_ROOT_PASSWORD=rootpass -e MYSQL_DATABASE=wordpress --name wordpressdb -v "$PWD/database":/var/lib/mysql -d mariadb:latest
                     fi
                 '''.stripIndent())*/
-                }
+                
         }
         /*stage('Start Wordpress container') {
             steps {
