@@ -6,8 +6,8 @@ pipeline {
         stage('Start MySQL') {
             steps {
                 echo 'Start MariaDB container'
-                sh(returnStdout: true, script:'''#!/bin/bash
-                    if [ "$$(docker ps -a | grep wordpressdb)" ]
+                sh(returnStdout: true, script:'''#!/bin/bash -xe
+                    if docker ps -a --format '{{.Names}}' | grep wordpressdb;
                     then
                         echo "Container exist, start container"
                         docker start wordpressdb
@@ -21,10 +21,10 @@ pipeline {
         stage('Start Wordpress container') {
             steps {
                 echo 'Start Wordpress'
-                sh(returnStdout: true, script:'''
+                sh(returnStdout: true, script:'''#!/bin/bash -xe
                     #!/bin/bash
                     cd ~/wordpress
-                    if [ "$$(docker ps -a | grep wordpress)" ]
+                    if docker ps -a --format '{{.Names}}' | grep wordpress;
                     then
                         echo "Container exist, start container"
                         docker start wordpress
