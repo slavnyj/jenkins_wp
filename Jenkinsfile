@@ -6,10 +6,10 @@ pipeline {
         stage('Test') {
             steps {
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [ docker container inspect wordpressdb ];then
-                    echo "Found file"
+                    if [ docker ps -a --format '{{.Names}}' | grep wordpress ];then
+                        echo "Found file"
                     else
-                    echo "Did not find file"
+                        echo "Did not find file"
                     fi
             '''.stripIndent())
             }
