@@ -8,9 +8,9 @@ pipeline {
                 sh(returnStdout: true, script: '''#!/bin/bash
                     if docker ps -q -f name=wordpressdb;
                     then
-                        echo "Found file"
+                        cd ~/wordpress && touch yes
                     else
-                        echo "Did not find file"
+                        cd ~/wordpress && touch not
                     fi
             '''.stripIndent())
             }
