@@ -6,9 +6,7 @@ pipeline {
         stage('Start MySQL') {
             steps {
                 echo 'Start MariaDB container'
-                sh(returnStdout: true, script:'''
-                    #!/bin/bash
-                    mkdir ~/wordpress && cd ~/wordpress
+                sh(returnStdout: true, script:'''#!/bin/bash
                     if [ "$$(docker ps -a | grep wordpressdb)" ]
                     then
                         echo "Container exist, start container"
@@ -16,7 +14,8 @@ pipeline {
                     else
                         echo "Container does not exist"
                         docker run -e MYSQL_ROOT_PASSWORD=rootpass -e MYSQL_DATABASE=wordpress --name wordpressdb -v "$PWD/database":/var/lib/mysql -d mariadb:latest
-                    fi'''.stripIndent())
+                    fi
+                '''.stripIndent())
             }
         }
         stage('Start Wordpress container') {
