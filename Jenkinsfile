@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-    //agent { node { label 'staging' } }
+    agent { node { label 'production' } }
 
     stages {
         stage('Start MySQL') {
