@@ -10,7 +10,7 @@ pipeline {
                 if (inspectExitCode == 0) {
                     sh "echo "Container exist 1" "
                 } else {
-                    sh script: "echo "DOnt Container exist 0 "
+                    sh script: "echo "DOnt Container exist 0" "
                 
                 /*sh(returnStdout: true, script:'''#!/bin/bash -xe
                     if docker ps -a --format '{{.Names}}' | grep wordpressdb;
