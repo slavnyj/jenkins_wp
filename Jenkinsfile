@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh label: '',
                     script: '''#!/bin/bash
-                    if docker ps -q -f name=dbwordpress;
+                    if [docker ps -q -f name=dbwordpress];
                     then
                         cd ~/wordpress && touch 11111
                     else
