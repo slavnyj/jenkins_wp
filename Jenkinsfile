@@ -7,7 +7,7 @@ pipeline {
             steps {
                 echo 'Start MariaDB container'
                 script {
-                    def inspectExitCode = sh script: "docker container inspect wordpressdb", returnStatus: true
+                    def inspectExitCode = sh script: "docker ps -a --format '{{.Names}}' | grep wordpressdb", returnStatus: true
                     if (inspectExitCode == 0) {
                         sh "echo "Container exist 1" "
                     }else {
