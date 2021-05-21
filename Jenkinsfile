@@ -3,7 +3,20 @@ pipeline {
     //agent { node { label 'staging' } }
 
     stages {
-        stage('Start MySQL') {
+        stage('Test') {
+            steps {
+                sh(returnStdout: true, script: '''#!/bin/bash
+                    if [ docker container inspect wordpressdb ];then
+                    echo "Found file"
+                    else
+                    echo "Did not find file"
+                    fi
+            '''.stripIndent())
+            }
+        }
+    }
+}
+       /*stage('Start MySQL') {
             steps {
                 echo 'Start MariaDB container'
                 script {
@@ -24,7 +37,7 @@ pipeline {
                     fi
                 '''.stripIndent())*/
                 
-        }
+    
         /*stage('Start Wordpress container') {
             steps {
                 echo 'Start Wordpress'
@@ -40,9 +53,8 @@ pipeline {
                         docker run -e WORDPRESS_DB_USER=root -e WORDPRESS_DB_PASSWORD=rootpass --name wordpress --link wordpressdb:mysql -p 80:80 -v "$PWD/html":/var/www/html -d wordpress
                     fi'''.stripIndent())
             }*/
-        }
-    }
-}
+        
+    
 
 
 
