@@ -7,6 +7,7 @@ pipeline {
             steps {
                 echo 'Start MariaDB container'
                 sh '''
+                    #!/bin/bash
                     mkdir ~/wordpress && cd ~/wordpress
                     if [ "$$(docker ps -a | grep wordpressdb)" ]
                     then
@@ -22,6 +23,7 @@ pipeline {
             steps {
                 echo 'Start Wordpress'
                 sh '''
+                    #!/bin/bash
                     cd ~/wordpress
                     if [ "$$(docker ps -a | grep wordpress)" ]
                     then
