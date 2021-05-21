@@ -6,7 +6,7 @@ pipeline {
         stage('Test') {
             steps {
                 sh(returnStdout: true, script: '''#!/bin/bash
-                    if [ docker ps -a --format '{{.Names}}' | grep wordpress ];then
+                    if [ docker ps -q -f name=wordpressdb ];then
                         echo "Found file"
                     else
                         echo "Did not find file"
