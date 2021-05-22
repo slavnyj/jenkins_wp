@@ -14,8 +14,14 @@ pipeline {
             }
             steps {
                 node ('production') {
-                    sh 'sudo reboot'
-                    echo "Production server is rebooted ..."
+                    script {
+                        try {
+                            sh 'sudo reboot'
+                        } catch (Exception e) {
+                            echo 'Exception occurred: ' + e.toString()
+                            echo "Production server is rebooted ..."
+                        }
+                    }
                 }
                 
             }
