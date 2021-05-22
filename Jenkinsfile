@@ -14,12 +14,8 @@ pipeline {
             }
             steps {
                 node ('production') {
-                    echo "Rebooting production server! ..."
                     sh 'sudo reboot'
-                    retry(20){
-                        sleep time: 5 unit: 'SECONDS'
-                        sh 'ssh -o ConnectTimeout=1 84.252.141.170 exit'
-}
+                    echo "Production server is rebooted ..."
                 }
                 
             }
@@ -31,8 +27,8 @@ pipeline {
             }
             steps {
                 node ('staging') {
-                    echo "Rebooting staging server! ..."
                     sh 'sudo reboot'
+                    echo "Staging server server is rebooted ..."
                 }
                 
             }
