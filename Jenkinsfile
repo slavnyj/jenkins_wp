@@ -33,8 +33,14 @@ pipeline {
             }
             steps {
                 node ('staging') {
-                    echo "Staging server server is rebooted ..."
-                    sh 'sudo shutdown -r now'
+                    script {
+                        try {
+                            sh 'sudo reboot'
+                        } catch (Exception e) {
+                            echo 'Exception occurred: ' + e.toString()
+                            echo "Staging server is rebooted ..."
+                        }
+                    }
                 }
                 
             }
@@ -46,13 +52,25 @@ pipeline {
             }
             steps {
                 node ('production') {
-                    echo "Rebooting production server! ..."
-                    sh 'sudo reboot'
+                    script {
+                        try {
+                            sh 'sudo reboot'
+                        } catch (Exception e) {
+                            echo 'Exception occurred: ' + e.toString()
+                            echo "Production server is rebooted ..."
+                        }
+                    }
                 }
 
                 node ('staging') {
-                    echo "Rebooting staging server! ..."
-                    sh 'sudo reboot'
+                    script {
+                        try {
+                            sh 'sudo reboot'
+                        } catch (Exception e) {
+                            echo 'Exception occurred: ' + e.toString()
+                            echo "Staging server is rebooted ..."
+                        }
+                    }
                 }
                 
             }
