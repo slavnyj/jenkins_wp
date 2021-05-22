@@ -27,8 +27,8 @@ pipeline {
             }
             steps {
                 node ('staging') {
-                    sh 'sudo reboot'
                     echo "Staging server server is rebooted ..."
+                    sh 'sudo shutdown -r now'
                 }
                 
             }
