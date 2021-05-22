@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Production uptime') {
             steps {
-                node ('productiom') {
+                node ('production') {
                     sh 'uptime -p'
                 }
             }
