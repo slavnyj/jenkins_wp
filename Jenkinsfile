@@ -16,6 +16,10 @@ pipeline {
                 node ('production') {
                     echo "Rebooting production server! ..."
                     sh 'sudo reboot'
+                    retry(20){
+                        sleep time: 5 unit: 'SECONDS'
+                        sh 'ssh -o ConnectTimeout=1 84.252.141.170 exit'
+}
                 }
                 
             }
